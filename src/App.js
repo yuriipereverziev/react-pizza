@@ -5,8 +5,6 @@ import Sort from "./components/Sort";
 import PizzaBlock from "./components/Pizza-block";
 import pizzas from "./assets/pizzas.json"
 
-console.log(pizzas)
-
 function App() {
     return (
         <div className="wrapper">
@@ -22,7 +20,13 @@ function App() {
                     <div className="content__items">
                         {
                             pizzas.map(obj => (
-                                <PizzaBlock title={obj.title} price={obj.price} image={obj.imageUrl}/>
+                                <PizzaBlock
+                                    title={obj.title}
+                                    price={obj.price}
+                                    image={obj.imageUrl}
+                                    size={obj.sizes}
+                                    type={obj.types}
+                                />
                             ))
                         }
                     </div>
