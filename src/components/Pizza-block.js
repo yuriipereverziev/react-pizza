@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function PizzaBlock({title, price, image, size, type}) {
+function PizzaBlock({title, price, image, size, type, id}) {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
@@ -18,7 +18,7 @@ function PizzaBlock({title, price, image, size, type}) {
                 <ul>
                     {
                         type.map(typeIdx => (
-                            <li onClick={() => setActiveType(typeIdx)}
+                            <li key={typeIdx} onClick={() => setActiveType(typeIdx)}
                                 className={activeType === typeIdx ? 'active' : ''}>
                                 {typeName[typeIdx]}
                             </li>
@@ -29,7 +29,7 @@ function PizzaBlock({title, price, image, size, type}) {
                 <ul>
                     {
                         size.map((size, idx) => (
-                            <li onClick={() => setActiveSize(idx)}
+                            <li key={size} onClick={() => setActiveSize(idx)}
                                 className={activeSize === idx ? 'active' : ''}>
                                 {size} см.
                             </li>
@@ -38,7 +38,7 @@ function PizzaBlock({title, price, image, size, type}) {
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от {price} ₽</div>
+                <div className="pizza-block__price">от {price} грн.</div>
                 <button className="button button--outline button--add">
                     <svg
                         width="12"
