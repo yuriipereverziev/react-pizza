@@ -6,8 +6,6 @@ function Sort() {
     const sortList = ['популярности', 'цене', 'алфавиту']
     const sortName = sortList[selected]
 
-
-
     const onClickSort = (idx) => {
         setSelected(idx)
         setOpen(false)

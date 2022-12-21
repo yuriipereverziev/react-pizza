@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 
-function PizzaBlock({title, price, image, size, type, id}) {
+function PizzaBlock({title, price, image, size, type}) {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
-
     const typeName = ['тонкое', 'традиционное']
 
     return (
@@ -16,25 +15,21 @@ function PizzaBlock({title, price, image, size, type, id}) {
             <h4 className="pizza-block__title">{title}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    {
-                        type.map(typeIdx => (
-                            <li key={typeIdx} onClick={() => setActiveType(typeIdx)}
-                                className={activeType === typeIdx ? 'active' : ''}>
-                                {typeName[typeIdx]}
-                            </li>
-                        ))
-                    }
+                    {type.map(typeIdx => (
+                        <li key={typeIdx} onClick={() => setActiveType(typeIdx)}
+                            className={activeType === typeIdx ? 'active' : ''}>
+                            {typeName[typeIdx]}
+                        </li>
+                    ))}
                 </ul>
 
                 <ul>
-                    {
-                        size.map((size, idx) => (
-                            <li key={size} onClick={() => setActiveSize(idx)}
-                                className={activeSize === idx ? 'active' : ''}>
-                                {size} см.
-                            </li>
-                        ))
-                    }
+                    {size.map((size, idx) => (
+                        <li key={size} onClick={() => setActiveSize(idx)}
+                            className={activeSize === idx ? 'active' : ''}>
+                            {size} см.
+                        </li>
+                    ))}
                 </ul>
             </div>
             <div className="pizza-block__bottom">
