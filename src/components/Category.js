@@ -2,7 +2,6 @@ import React from "react";
 
 function Category() {
     const [active, setActive] = React.useState(0)
-    
     const category = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
     const onClickCategory = (idx) => {
@@ -11,13 +10,11 @@ function Category() {
     return (
         <div className="categories">
             <ul>
-                {
-                    category.map((elem, idx) => (
-                        <li key={idx} onClick={() => onClickCategory(idx)} className={active === idx ? 'active' : ''}>
-                            {elem}
-                        </li>
-                    ))
-                }
+                {category.map((elem, idx) => (
+                    <li key={idx} onClick={() => onClickCategory(idx)} className={active === idx ? 'active' : ''}>
+                        {elem}
+                    </li>
+                ))}
             </ul>
         </div>
     )

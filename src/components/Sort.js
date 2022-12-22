@@ -31,15 +31,13 @@ function Sort() {
             {open && (
                 <div className="sort__popup">
                     <ul>
-                        {
-                            sortList.map((elem, idx) => (
-                                <li key={idx}
-                                    onClick={() => onClickSort(idx)}
-                                    className={selected === idx ? 'active' : ''}>
-                                    {elem}
-                                </li>
-                            ))
-                        }
+                        {sortList.map((elem, idx) => (
+                            <li key={idx}
+                                onClick={() => onClickSort(idx)}
+                                className={selected === idx ? 'active' : ''}>
+                                {elem}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             )}
