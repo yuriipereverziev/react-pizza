@@ -5,7 +5,8 @@ import Sort from "../components/Sort";
 import Skeleton from "../components/Pizza-block/Skeleton";
 import PizzaBlock from "../components/Pizza-block";
 
-const Home = () => {
+const Home = ({searchValue}) => {
+
     const [items, setItems] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
     const [categoryId, setCategoryId] = React.useState(0)
@@ -17,18 +18,19 @@ const Home = () => {
     const sortBy = sortType.sortProperty.replace('-', '')
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const search = searchValue ? `&search=${searchValue}` : '';
 
     React.useEffect(() => {
         setIsLoading(true)
-        fetch(`https://63a2ff7b9704d18da082a2d6.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`,
+        fetch(`https://63a2ff7b9704d18da082a2d6.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
         )
             .then((res) => res.json())
             .then((arr) => {
                 setItems(arr)
                 setIsLoading(false)
-                // window.scrollTo(0, 0)
+                window.scrollTo(0, 0)
             })
-    }, [categoryId, sortType])
+    }, [categoryId, sortType, searchValue])
 
 
     return (

@@ -13,8 +13,8 @@ function Sort({ value, onChangeSort }) {
         { name: 'алфавиту ↓', sortProperty: '-title' },
     ]
 
-    const onClickSort = (i) => {
-        onChangeSort(i)
+    const onClickSort = (obj) => {
+        onChangeSort(obj)
         setOpen(false)
     }
 
@@ -30,9 +30,11 @@ function Sort({ value, onChangeSort }) {
                 <div className="sort__popup">
                     <ul>
                         {sortList.map((obj, idx) => (
+
                             <li key={idx}
                                 onClick={() => onClickSort(obj)}
-                                className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
+                                className={value.sortProperty === obj.sortProperty ? 'active' : ''}
+                            >
                                 {obj.name}
                             </li>
                         ))}
