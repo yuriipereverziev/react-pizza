@@ -4,8 +4,10 @@ import Category from "../components/Category";
 import Sort from "../components/Sort";
 import Skeleton from "../components/Pizza-block/Skeleton";
 import PizzaBlock from "../components/Pizza-block";
+import {SearchContext} from "../App";
 
-const Home = ({searchValue}) => {
+const Home = () => {
+    const {searchValue} = React.useContext(SearchContext)
 
     const [items, setItems] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
@@ -37,6 +39,7 @@ const Home = ({searchValue}) => {
         <>
             <div className="content__top">
                 <Category value={categoryId} onChangeCategory={(i) => setCategoryId(i)}/>
+
                 <Sort value={sortType} onChangeSort={(i) => setSortType(i)}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
