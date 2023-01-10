@@ -10,23 +10,18 @@ import {setCategoryId} from "../redux/slices/filterSlice";
 
 const Home = () => {
     const dispatch = useDispatch()
-    const categoryId = useSelector((state) =>  state.filter.categoryId)
+    const { categoryId, sort } = useSelector((state) => state.filter)
 
     const {searchValue} = React.useContext(SearchContext)
     const [items, setItems] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
-    // const [categoryId, setCategoryId] = React.useState(0)
-    const [sortType, setSortType] = React.useState({
-        name: 'популярности',
-        sortProperty: 'rating'
-    })
 
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id))
     }
 
-    const sortBy = sortType.sortProperty.replace('-', '')
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
+    const sortBy = sort.sortProperty.replace('-', '')
+    const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
@@ -40,7 +35,7 @@ const Home = () => {
                 setIsLoading(false)
                 window.scrollTo(0, 0)
             })
-    }, [categoryId, sortType, searchValue])
+    }, [categoryId, sort.sortProperty, searchValue])
 
 
     return (
@@ -48,7 +43,7 @@ const Home = () => {
             <div className="content__top">
                 <Category value={categoryId} onChangeCategory={onChangeCategory}/>
 
-                <Sort value={sortType} onChangeSort={(i) => setSortType(i)}/>
+                <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
 

@@ -12,7 +12,6 @@ export const SearchContext = React.createContext()
 function App() {
     const [searchValue, setSearchValue] = React.useState('')
 
-    console.log(1)
     return (
         <div className="wrapper">
             <SearchContext.Provider value={{searchValue, setSearchValue}}>
