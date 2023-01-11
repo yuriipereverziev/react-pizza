@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from "react-redux";
 
+import axios from "axios";
 import Category from "../components/Category";
 import Sort from "../components/Sort";
 import Skeleton from "../components/Pizza-block/Skeleton";
@@ -10,7 +11,7 @@ import {setCategoryId} from "../redux/slices/filterSlice";
 
 const Home = () => {
     const dispatch = useDispatch()
-    const { categoryId, sort } = useSelector((state) => state.filter)
+    const {categoryId, sort} = useSelector((state) => state.filter)
 
     const {searchValue} = React.useContext(SearchContext)
     const [items, setItems] = React.useState([])
@@ -20,21 +21,22 @@ const Home = () => {
         dispatch(setCategoryId(id))
     }
 
-    const sortBy = sort.sortProperty.replace('-', '')
-    const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const search = searchValue ? `&search=${searchValue}` : '';
 
     React.useEffect(() => {
         setIsLoading(true)
-        fetch(`https://63a2ff7b9704d18da082a2d6.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
-        )
-            .then((res) => res.json())
-            .then((arr) => {
-                setItems(arr)
+
+        const sortBy = sort.sortProperty.replace('-', '')
+        const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
+        const category = categoryId > 0 ? `category=${categoryId}` : '';
+        const search = searchValue ? `&search=${searchValue}` : '';
+
+        axios.get(`https://63a2ff7b9704d18da082a2d6.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`)
+            .then((res) => {
+                setItems(res.data)
                 setIsLoading(false)
-                window.scrollTo(0, 0)
+
             })
+        window.scrollTo(0, 0)
     }, [categoryId, sort.sortProperty, searchValue])
 
 
