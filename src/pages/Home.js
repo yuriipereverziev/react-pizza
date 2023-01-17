@@ -43,9 +43,10 @@ const Home = () => {
     return (
         <>
             <div className="content__top">
-                <Category value={categoryId} onChangeCategory={onChangeCategory}/>
 
+                <Category value={categoryId} onChangeCategory={onChangeCategory}/>
                 <Sort/>
+
             </div>
             <h2 className="content__title">Все пиццы</h2>
 
@@ -55,6 +56,7 @@ const Home = () => {
                     : items.map((obj => (
                         <PizzaBlock
                             key={obj.id}
+                            id={obj.id}
                             title={obj.title}
                             price={obj.price}
                             image={obj.imageUrl}
